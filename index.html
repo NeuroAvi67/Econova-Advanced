@@ -1,0 +1,217 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>ECONOVA</title>
+<style>
+:root{--bg:#0a0f1e;--p:#111a2e;--p2:#17223a;--b:#25314c;--t:#e6ebf5;--m:#8b97b3;--g:#2ecc9a;--r:#e0626b;--a:#6ea8ff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme=light]{--bg:#f3f5f9;--p:#fff;--p2:#eef1f7;--b:#d5dbe8;--t:#131a2b;--m:#5d6984;--g:#0f9f72;--r:#c9404a;--a:#2866d6}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--t);font:14px/1.5 Inter,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--p);z-index:30}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;align-items:center;gap:8px;padding:8px 14px;background:var(--p);border-bottom:1px solid var(--b)}
+.brand{font-weight:800;letter-spacing:.14em;color:var(--a)}header .sp{flex:1}
+button,select,input{font:inherit;color:var(--t);background:var(--p2);border:1px solid var(--b);border-radius:6px;padding:6px 10px}
+button{cursor:pointer}button:hover{border-color:var(--a)}button.on{background:var(--a);color:#fff;border-color:var(--a)}
+input{width:100%;min-width:0}label{display:block;color:var(--m);font-size:12px;margin:6px 0 2px}
+aside{position:fixed;top:calc(env(safe-area-inset-top,0px) + 49px);bottom:0;left:0;width:190px;background:var(--p);border-right:1px solid var(--b);padding:10px 6px;overflow:auto;transform:translateX(-100%);transition:.2s;z-index:15}
+aside.open{transform:none}aside a{display:block;padding:8px 12px;border-radius:6px;color:var(--m);text-decoration:none}aside a.on,aside a:hover{background:var(--p2);color:var(--t)}
+main{padding:16px;max-width:1200px;margin:auto}
+@media(min-width:900px){aside{transform:none}main{margin-left:190px;max-width:none}#bg{display:none}}
+h1{font-size:22px;margin:4px 0 10px}h2{font-size:15px;margin:20px 0 8px;text-transform:uppercase;letter-spacing:.06em;color:var(--m)}h3{margin:0 0 4px;font-size:15px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.c{background:var(--p);border:1px solid var(--b);border-radius:8px;padding:12px;min-width:0}
+.up{color:var(--g)}.dn{color:var(--r)}.m{color:var(--m)}.big{font-size:20px;font-weight:700}
+.warn{background:var(--p2);border-left:3px solid #f0b429;padding:8px 12px;border-radius:4px;color:var(--m);margin-bottom:12px;font-size:13px}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse}th,td{padding:7px 8px;border-bottom:1px solid var(--b);text-align:right;white-space:nowrap}th:first-child,td:first-child{text-align:left}th{color:var(--m);font-weight:500;cursor:pointer}
+tr.k:hover{background:var(--p2);cursor:pointer}.row{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:6px 0}.tip{font-size:12px;color:var(--m);min-height:18px;overflow-x:auto;white-space:nowrap}
+.pop{position:absolute;right:14px;top:46px;background:var(--p);border:1px solid var(--b);border-radius:8px;padding:12px;width:270px;display:none;z-index:40}
+#sr{position:fixed;inset:0;background:#0009;display:none;z-index:50;padding:12vh 12px}#sr>div{max-width:560px;margin:auto;background:var(--p);border:1px solid var(--b);border-radius:10px;padding:10px}
+.it{padding:7px 8px;border-radius:5px;cursor:pointer;display:flex;justify-content:space-between}.it.on{background:var(--p2)}
+details{border-bottom:1px solid var(--b);padding:6px 0}summary{cursor:pointer;font-weight:600}.bar{height:8px;background:var(--p2);border-radius:4px;overflow:hidden}.bar i{display:block;height:100%;background:var(--g)}
+.fc{min-height:80px;cursor:pointer;display:flex;align-items:center;justify-content:center;text-align:center}
+.live{color:var(--g);font-size:11px;font-weight:700;animation:pl 1.4s infinite}@keyframes pl{50%{opacity:.3}}#bn{font-size:10px}
+#tape{overflow:hidden;white-space:nowrap;background:var(--p2);border-bottom:1px solid var(--b);font-size:12px;padding:5px 0}.tt{display:inline-block;animation:tp 45s linear infinite}.tt:hover{animation-play-state:paused}.tk{margin:0 18px}@keyframes tp{to{transform:translateX(-50%)}}
+@media(min-width:900px){#tape{margin-left:190px}}@media(max-width:700px){#ms .x,.live{display:none}}
+.fu{animation:fu .8s}.fd{animation:fd .8s}@keyframes fu{from{background:#2ecc9a66}to{background:transparent}}@keyframes fd{from{background:#e0626b66}to{background:transparent}}
+</style></head><body>
+<header><button id="bg" onclick="$('aside').classList.toggle('open')" aria-label="Menu">☰</button><span class="brand">ECONOVA</span><span class="live">● LIVE</span><button onclick="sOpen()" style="flex:0 1 220px;text-align:left;color:var(--m)">Search ⌘K</button><span class="sp"></span><span id="ms" class="m" style="font-size:12px"></span><button onclick="pop('nt')" aria-label="Notifications">🔔<sup id="bn" class="dn"></sup></button><button onclick="tgl()" aria-label="Theme">◐</button><button onclick="pop('pr')" aria-label="Profile">👤</button></header><div id="tape"></div>
+<div class="pop" id="nt"><b>Live alerts</b><div id="ev" class="m" style="margin:8px 0">Waiting for price moves…</div><p class="m" style="font-size:12px">Prices are simulated in your browser and tick in real time. Connect a data provider for real quotes.</p></div>
+<div class="pop" id="pr"><b>Guest</b><p class="m">Watchlist, portfolios and lesson progress are saved in this browser only. Sign-in needs a backend (Supabase).</p></div>
+<aside id="nav"></aside><main id="main"></main>
+<div id="sr" onclick="if(event.target==this)sClose()"><div><input id="si" placeholder="Search stocks, lessons, concepts, glossary…" autocomplete="off"><div id="so"></div></div></div>
+<script>
+const $=s=>document.querySelector(s),f=(x,d=2)=>x.toLocaleString('en-IN',{minimumFractionDigits:d,maximumFractionDigits:d});
+const up=x=>`<span class="${x>=0?'up':'dn'}">${x>=0?'▲ +':'▼ '}${f(x)}%</span>`;
+let S={theme:'dark',wl:['RELIANCE','TCS'],hist:[],prog:{},cur:'Main',pf:{}};
+try{Object.assign(S,JSON.parse(localStorage.getItem('econova')||'{}'))}catch(e){}
+const save=()=>{try{localStorage.setItem('econova',JSON.stringify(S))}catch(e){}};
+const newPf=()=>({cash:1000000,hold:{},tx:[],real:0,snap:[]});if(!S.pf.Main)S.pf.Main=newPf();
+document.documentElement.dataset.theme=S.theme;
+function tgl(){S.theme=S.theme=='dark'?'light':'dark';document.documentElement.dataset.theme=S.theme;save();go()}
+function pop(id){const e=$('#'+id),o=e.style.display=='block';$$p();e.style.display=o?'none':'block';if(id=='nt'&&!o){NB=0;$('#bn').textContent=''}}function $$p(){['nt','pr'].forEach(i=>$('#'+i).style.display='none')}
+/* ---- demo data (seeded random walks; NOT market data) ---- */
+const ST=[['RELIANCE','Reliance Industries','Energy & Conglomerate',2900,'Oil-to-chemicals, retail and digital/telecom (Jio) businesses.','Refining and petrochemical margins, retail sales, telecom subscriptions.','ONGC, Bharti Airtel, DMart'],
+['TCS','Tata Consultancy Services','IT Services',4000,'Global IT services and consulting firm.','Multi-year technology services contracts billed to enterprises.','Infosys, Accenture, Wipro'],
+['HDFCBANK','HDFC Bank','Banking',1650,'Large private-sector Indian bank.','Net interest margin on loans plus fees.','ICICI Bank, SBI, Kotak'],
+['INFY','Infosys','IT Services',1800,'IT consulting and digital services.','Project and managed-services fees from global clients.','TCS, Cognizant, HCLTech'],
+['TATAMOTORS','Tata Motors','Automobiles',950,'Passenger vehicles, commercial vehicles and Jaguar Land Rover.','Vehicle sales plus financing and aftersales.','Maruti Suzuki, Mahindra, Hyundai'],
+['ITC','ITC Ltd','FMCG',470,'Cigarettes, FMCG foods, hotels and paper.','Cigarette cash flows funding diversification into FMCG.','HUL, Nestlé India, Godrej'],
+['AAPL','Apple Inc.','Technology',17500,'Consumer devices, software and services.','Hardware sales plus recurring services revenue.','Samsung, Google, Microsoft'],
+['MSFT','Microsoft Corp.','Technology',35000,'Cloud, productivity software and gaming.','Cloud (Azure) usage, software subscriptions, licences.','Amazon, Google, Oracle'],
+['NVDA','NVIDIA Corp.','Semiconductors',9500,'GPUs and AI computing platforms.','Selling accelerators, systems and software for AI/graphics.','AMD, Intel, custom chips'],
+['AMZN','Amazon.com','E-commerce & Cloud',15500,'Online retail, logistics and AWS cloud.','Marketplace and retail margins, AWS cloud, advertising.','Walmart, Microsoft, Flipkart']].map(a=>({sym:a[0],name:a[1],sec:a[2],base:a[3],desc:a[4],how:a[5],comp:a[6]}));
+const IDX=[['NIFTY 50',24500],['SENSEX',80500],['NASDAQ',19000],['S&P 500',5800],['DOW JONES',42000],['FTSE 100',8200],['NIKKEI 225',38500],['GOLD $/oz',2650],['BRENT CRUDE $',74],['USD/INR',83.2]];
+function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const cache={};
+function ser(k,base,n=1260,v=.016){const key=k+n;if(cache[key])return cache[key];const r=rng([...k].reduce((a,c)=>a*31+c.charCodeAt(0),7));let p=100,a=[];
+for(let i=0;i<n;i++){const o=p,c=o*(1+(r()-.48)*v*2);a.push({o,c,h:Math.max(o,c)*(1+r()*v/2),l:Math.min(o,c)*(1-r()*v/2),v:Math.round(1e6*(.5+r()))});p=c}
+const s=base/p;a.forEach(x=>{x.o*=s;x.h*=s;x.l*=s;x.c*=s});let d=new Date();d.setHours(0,0,0,0);
+for(let i=n-1;i>=0;i--){while(d.getDay()%6==0)d.setDate(d.getDate()-1);a[i].t=new Date(d);d.setDate(d.getDate()-1)}return cache[key]=a}
+const Q=sym=>{const s=ser(sym,ST.find(x=>x.sym==sym).base),l=s[s.length-1].c;return{p:l,ch:(l/s[s.length-2].c-1)*100}};
+const sma=(a,n)=>a.map((_,i)=>i<n-1?null:a.slice(i-n+1,i+1).reduce((x,y)=>x+y)/n);
+const boll=a=>a.map((_,i)=>{if(i<19)return null;const w=a.slice(i-19,i+1),m=w.reduce((x,y)=>x+y)/20,sd=Math.sqrt(w.reduce((x,y)=>x+(y-m)**2,0)/20);return[m-2*sd,m+2*sd]});
+const ema=(a,n)=>{const k=2/(n+1);let e=a[0];return a.map(v=>e=v*k+e*(1-k))};
+function rsi(a){let g=0,l=0;for(let i=1;i<=14;i++){const d=a[i]-a[i-1];d>0?g+=d:l-=d}g/=14;l/=14;for(let i=15;i<a.length;i++){const d=a[i]-a[i-1];g=(g*13+Math.max(d,0))/14;l=(l*13+Math.max(-d,0))/14}return 100-100/(1+g/(l||1e-9))}
+const dtf=t=>t.getHours()?t.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}):t.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'2-digit'});
+function tfData(sym,tf){const d=ser(sym,ST.find(x=>x.sym==sym).base);if(tf=='1D'){const i=ser(sym+'D',d[d.length-1].c,78,.003),o=new Date();o.setHours(9,15,0,0);const k=Math.max(1,Math.min(78,Math.floor((Date.now()-o)/3e5)+1));
+if(!IDS[sym]||IDS[sym].k!=k)IDS[sym]={k,f:Q(sym).p/i[k-1].o};const F=IDS[sym].f;
+return i.slice(0,k).map((x,j)=>{const p=Q(sym).p,op=x.o*F,c=j==k-1?p:x.c*F;return{...x,o:op,c,h:Math.max(x.h*F,c,op),l:Math.min(x.l*F,c,op),t:new Date(o.getTime()+j*3e5)}})}
+return d.slice(-({'1W':5,'1M':22,'3M':66,'6M':126,'1Y':252,'5Y':1260,MAX:1260}[tf]))}
+const spark=a=>{const mn=Math.min(...a),mx=Math.max(...a);return`<svg viewBox="0 0 100 28" width="100%" height="28" preserveAspectRatio="none"><polyline fill="none" stroke="${a[a.length-1]>=a[0]?'var(--g)':'var(--r)'}" stroke-width="1.5" points="${a.map((v,i)=>i+','+(26-(v-mn)/(mx-mn||1)*24)).join(' ')}"/></svg>`};
+function line(a,x,y,c){let p='',on=0;a.forEach((v,i)=>{if(v==null){on=0;return}p+=(on?'L':'M')+x(i)+' '+y(v);on=1});return`<path d="${p}" fill="none" stroke="${c}" stroke-width="1.2"/>`}
+function chart(id,d,type,ov){const el=$('#'+id),W=800,H=300,VH=50,R=52,n=d.length,w=(W-R)/n,cl=d.map(q=>q.c),bb=ov.bb?boll(cl):[];
+let mn=Math.min(...d.map(q=>q.l)),mx=Math.max(...d.map(q=>q.h));bb.forEach(b=>{if(b){mn=Math.min(mn,b[0]);mx=Math.max(mx,b[1])}});
+const y=v=>8+(H-16)*(1-(v-mn)/(mx-mn||1)),x=i=>i*w+w/2,vm=Math.max(...d.map(q=>q.v));let s=`<svg viewBox="0 0 ${W} ${H+VH}" width="100%" style="display:block;touch-action:pan-y">`;
+for(let k=0;k<5;k++){const v=mn+(mx-mn)*k/4;s+=`<line x1="0" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--b)" stroke-width=".5"/><text x="${W-R+4}" y="${y(v)+3}" fill="var(--m)" font-size="10">${f(v,0)}</text>`}
+d.forEach((q,i)=>{const c=q.c>=q.o?'var(--g)':'var(--r)',vh=q.v/vm*VH;s+=`<rect x="${i*w}" y="${H+VH-vh}" width="${Math.max(w-1,.5)}" height="${vh}" fill="${c}" opacity=".35"/>`;
+if(type=='c')s+=`<line x1="${x(i)}" x2="${x(i)}" y1="${y(q.h)}" y2="${y(q.l)}" stroke="${c}"/><rect x="${x(i)-w*.35}" y="${y(Math.max(q.o,q.c))}" width="${w*.7}" height="${Math.max(1,Math.abs(y(q.o)-y(q.c)))}" fill="${c}"/>`});
+if(type=='l'){const p=cl.map((v,i)=>x(i)+','+y(v)).join(' ');s+=`<polygon points="${x(0)},${H} ${p} ${x(n-1)},${H}" fill="var(--a)" opacity=".1"/><polyline points="${p}" fill="none" stroke="var(--a)" stroke-width="1.6"/>`}
+if(ov.sma)s+=line(sma(cl,20),x,y,'#f0b429');if(ov.bb){s+=line(bb.map(b=>b&&b[0]),x,y,'#9b8cff')+line(bb.map(b=>b&&b[1]),x,y,'#9b8cff')}
+s+=`<g id="${id}x" style="display:none"><line id="${id}v" y1="0" y2="${H+VH}" stroke="var(--m)" stroke-dasharray="3"/><line id="${id}h" x1="0" x2="${W-R}" stroke="var(--m)" stroke-dasharray="3"/></g></svg><div class="tip" id="${id}t">Hover or touch the chart</div>`;el.innerHTML=s;
+const sv=el.firstChild,g=$('#'+id+'x'),tp=$('#'+id+'t'),mv=e=>{HV=Date.now();const r=sv.getBoundingClientRect(),cx=(e.touches?e.touches[0].clientX:e.clientX)-r.left,i=Math.max(0,Math.min(n-1,Math.floor(cx/r.width*W/w))),q=d[i],yy=y(q.c);g.style.display='';
+$('#'+id+'v').setAttribute('x1',x(i));$('#'+id+'v').setAttribute('x2',x(i));$('#'+id+'h').setAttribute('y1',yy);$('#'+id+'h').setAttribute('y2',yy);tp.innerHTML=`${dtf(q.t)} · O ${f(q.o)} H ${f(q.h)} L ${f(q.l)} C <b>${f(q.c)}</b> · Vol ${f(q.v,0)}`};
+sv.onmousemove=mv;sv.ontouchmove=mv;sv.onmouseleave=()=>{HV=0;g.style.display='none'}}
+function mini(a,lab){const mx=Math.max(...a),mn=Math.min(...a,0);return`<svg viewBox="0 0 400 140" width="100%"><polyline fill="none" stroke="var(--g)" stroke-width="2" points="${a.map((v,i)=>(i/(a.length-1)*390+5)+','+(130-(v-mn)/(mx-mn||1)*120)).join(' ')}"/><text x="6" y="12" fill="var(--m)" font-size="10">${lab||''} max ${f(mx,0)}</text></svg>`}
+const banner=`<div class="warn"><b>Simulated live data.</b> Prices, indices, rates and charts update in real time, but they are generated in your browser, not pulled from an exchange or data provider. Simulated trading is for learning only; no real money or brokerage is involved. Nothing here is investment advice.</div>`;
+/* ---- content ---- */
+const LES=[['Compounding','Interest earns interest, so growth accelerates over time.','₹1,00,000 at 10% a year becomes about ₹6.7 lakh in 20 years.','Rate, time, reinvestment','At a fixed rate, doubling the time usually…',['Doubles the gain','More than doubles the gain','Halves the gain'],1],
+['Risk & return','Higher expected returns usually come with larger possible losses.','Equities swing more than government bonds but have historically paid more over long periods.','Volatility, drawdown, diversification','Diversifying across assets mainly reduces…',['Fees','Specific (single-asset) risk','Inflation'],1],
+['Stocks vs bonds','A stock is part ownership; a bond is a loan that pays interest.','Buying a company bond means lending to it for fixed coupons.','Equity, coupon, maturity','A bondholder is a…',['Part-owner','Lender','Employee'],1],
+['Index funds & ETFs','They hold a basket of securities to track a market index cheaply.','An index fund tracking NIFTY 50 holds its 50 stocks in index weights.','Expense ratio, tracking error','Index funds mostly aim to…',['Beat the market','Match an index','Avoid all risk'],1],
+['Valuation basics','Price relative to earnings, sales or cash flow hints at what the market expects.','A P/E of 20 means ₹20 paid per ₹1 of annual earnings.','P/E, P/B, DCF','A higher P/E generally implies…',['Higher growth expectations','Guaranteed profit','Lower price'],0],
+['Inflation','Rising prices reduce what each rupee buys.','At 6% inflation, ₹100 buys about ₹55 worth in 10 years.','Real vs nominal return','Real return equals nominal return minus…',['Tax','Inflation','Fees'],1]].map(a=>({id:a[0],name:a[0],s:a[1],ex:a[2],k:a[3],q:a[4],o:a[5],a:a[6]}));
+const GL=[['P/E ratio','Share price divided by earnings per share.'],['Market cap','Share price × shares outstanding.'],['Dividend','A share of profit paid to shareholders.'],['Bull market','A sustained period of rising prices.'],['Bear market','A sustained fall, usually 20% or more.'],['Liquidity','How easily an asset converts to cash.'],['Yield','Annual income as a percent of price.'],['Diversification','Spreading money across assets to reduce risk.'],['Repo rate','The rate at which a central bank lends to banks.'],['CAGR','Compound annual growth rate over a period.']];
+const CON=[['GDP','Total value of goods and services produced in a country in a period.'],['Inflation','A general rise in prices; central banks often target around 2–4%.'],['Monetary policy','Central bank control of interest rates and money supply.'],['Fiscal policy','Government taxation and spending decisions.'],['Unemployment','Share of the labour force seeking but not finding work.'],['Business cycle','Alternating expansion and contraction of economic activity.'],['Elasticity','How strongly quantity responds to a price change.'],['Market structures','Perfect competition, monopolistic competition, oligopoly, monopoly.'],['Exchange rates','The price of one currency in terms of another.'],['Balance of payments','Record of a country’s transactions with the rest of the world.']];
+const CAS=[['Apple','Premium devices sold with a growing services layer (App Store, iCloud, subscriptions).','Hardware, Services, Wearables','Ecosystem lock-in, brand'],['NVIDIA','Designs AI/graphics chips and software, relying on foundries to manufacture.','Data centre, Gaming, Automotive','Software stack, performance lead'],['Reliance','A conglomerate pairing cash-generating energy with consumer businesses.','Energy, Retail, Digital services','Scale, integrated distribution'],['Tata Motors','Vehicle maker with Indian commercial/passenger and Jaguar Land Rover operations.','Passenger, Commercial, JLR','Brand reach, EV investments'],['Amazon','Marketplace and logistics network that also rents cloud computing.','Retail, AWS, Advertising','Logistics scale, AWS'],['Microsoft','Sells software subscriptions and cloud infrastructure to enterprises.','Cloud, Productivity, Gaming','Enterprise relationships']];
+/* ---- helpers & calculators ---- */
+const num=id=>parseFloat($('#'+id).value)||0,out=(id,h)=>$('#'+id).innerHTML=h,inp=(id,l,v,st=1)=>`<label for="${id}">${l}</label><input id="${id}" type="number" step="${st}" value="${v}">`;
+const inr=x=>'₹'+f(x,0);
+function calcC(){const P=num('cP'),r=num('cR')/100,fq=num('cF'),y=Math.min(num('cY'),60),m=num('cM')*12/fq,a=[];for(let i=0;i<=y;i++){const k=(1+r/fq)**(fq*i);a.push(P*k+(r?m*(k-1)/(r/fq):m*fq*i))}
+out('cO',`<div class="big up">${inr(a[y])}</div><div class="m">Contributed ${inr(P+num('cM')*12*y)} · growth ${inr(a[y]-P-num('cM')*12*y)}</div>`+mini(a,'Balance'))}
+const compound=()=>`<div class="c"><h3>Compound interest</h3><div class="row"><div>${inp('cP','Principal (₹)',100000)}</div><div>${inp('cR','Annual rate %',10,.1)}</div></div><div class="row"><div>${inp('cY','Years',20)}</div><div><label for="cF">Compounding/yr</label><select id="cF" style="width:100%"><option>1</option><option>4</option><option selected>12</option><option>365</option></select></div></div>${inp('cM','Monthly contribution (₹)',0)}<button onclick="calcC()">Calculate</button><div id="cO"></div></div>`;
+function calcI(){const a=num('iA'),r=num('iR')/100,y=num('iY');out('iO',`Same basket costs <b>${inr(a*(1+r)**y)}</b> after ${y} years.<br>${inr(a)} today buys only <b class="dn">${inr(a/(1+r)**y)}</b> worth of today’s goods.`)}
+function calcG(){const a=num('gA'),b=num('gB');out('gO',a?`Growth: <b class="${b>=a?'up':'dn'}">${f((b/a-1)*100)}%</b>`:'Enter a base value.')}
+function sd(){const D=num('sdD'),Sh=num('sdS'),P=num('sdP'),pe=(90+D-Sh)/5,qe=100+D-2*pe,qd=100+D-2*P,qs=10+Sh+3*P,X=q=>q/1.6*3.8+10,Y=p=>230-p*4.4;
+const L=(f1,c)=>`<line x1="${X(f1(0)).toFixed(1)}" y1="${Y(0)}" x2="${X(f1(50)).toFixed(1)}" y2="${Y(50)}" stroke="${c}" stroke-width="2"/>`;
+out('sdO',`<svg viewBox="0 0 400 240" width="100%">${L(p=>100+D-2*p,'var(--a)')}${L(p=>10+Sh+3*p,'var(--r)')}<circle cx="${X(qe)}" cy="${Y(pe)}" r="5" fill="var(--g)"/><line x1="0" x2="400" y1="${Y(P)}" y2="${Y(P)}" stroke="var(--m)" stroke-dasharray="3"/><text x="8" y="12" fill="var(--m)" font-size="10">Price ↑ / Quantity →  (blue demand, red supply)</text></svg>Equilibrium price <b>${f(pe)}</b>, quantity <b>${f(qe,1)}</b>.<br>At price ${f(P,1)}: ${qd>qs?`<b class="dn">shortage of ${f(qd-qs,1)}</b>`:`<b class="up">surplus of ${f(qs-qd,1)}</b>`}.`)}
+const FX={USD:1,INR:83.2,EUR:.92,GBP:.79,JPY:150};
+function fx(){const a=num('xA'),r=a/FX[$('#xF').value]*FX[$('#xT').value];out('xO',`<span class="big">${f(r)} ${$('#xT').value}</span><div class="m">1 ${$('#xF').value} = ${f(FX[$('#xT').value]/FX[$('#xF').value],4)} ${$('#xT').value} · updated ${new Date().toLocaleTimeString('en-IN')}</div>`)}
+const CY=[['Expansion','Output, jobs and spending grow.'],['Peak','Growth tops out; inflation pressure often builds.'],['Contraction','Output and jobs fall; a deep one is a recession.'],['Recovery','Activity bottoms and starts to rebuild.']];
+function cyc(i){out('cyO',`<svg viewBox="0 0 400 120" width="100%"><path d="M0 60 Q50 0 100 60 T200 60 T300 60 T400 60" fill="none" stroke="var(--m)"/>${[[50,22],[100,60],[150,98],[200,60]].map((p,k)=>`<circle cx="${p[0]}" cy="${p[1]}" r="${k==i?7:4}" fill="${k==i?'var(--g)':'var(--m)'}"/>`).join('')}</svg><b>${CY[i][0]}</b>: ${CY[i][1]}`)}
+function dcf(sym){const P=Q(sym).p,F=num('dF'),g=num('dG')/100,d=num('dD')/100,tg=num('dT')/100,N=Math.min(num('dN'),30);if(d<=tg)return out('dO','<span class="dn">Discount rate must exceed terminal growth.</span>');let v=0,c=F;for(let t=1;t<=N;t++){c*=1+g;v+=c/(1+d)**t}v+=c*(1+tg)/(d-tg)/(1+d)**N;const mos=(v/P-1)*100;
+out('dO',`Intrinsic value/share <b class="big">${inr(v)}</b><br>Live sim price ${inr(P)} → ${mos>=0?'<span class="up">'+f(mos,1)+'% below':'<span class="dn">'+f(-mos,1)+'% above'}</span> the model value.<div class="m">The result only restates your assumptions; it is not a forecast.</div>`)}
+function ue(){const c=num('uC'),l=num('uL'),m=num('uM')/100,ch=num('uH')/100,life=ch?1/ch:0,ltv=l*m*life;out('uO',`Lifetime ≈ ${f(life,1)} months · LTV <b>${inr(ltv)}</b> · LTV/CAC <b class="${ltv/c>=3?'up':'dn'}">${f(ltv/c)}</b> (3+ is a common benchmark) · CAC payback <b>${f(c/(l*m||1),1)} months</b>`)}
+/* ---- pages ---- */
+const R={};let ui={tf:'1Y',type:'c',sma:0,bb:0},curS='RELIANCE';
+const srow=s=>{const q=Q(s.sym);return`<tr class="k" onclick="location.hash='stocks-${s.sym}'"><td><b>${s.sym}</b> <span class="m">${s.name}</span></td><td>${s.sec}</td><td>${LP(s.sym)}</td><td>${LC(s.sym)}</td><td onclick="event.stopPropagation();wl('${s.sym}')">${S.wl.includes(s.sym)?'★':'☆'}</td></tr>`};
+R.home=()=>{const mv=ST.map(s=>({s,...Q(s.sym)})).sort((a,b)=>b.ch-a.ch),done=Object.keys(S.prog).length;
+return`<h1>Understand Money. Decode Markets. Think Beyond.</h1>${banner}<h2>Market overview · live sim</h2><div class="grid">${IDX.map(([n,v])=>{const s=ser(n,v,60,.008),l=s[59].c;return`<div class="c"><span class="m">${n}</span><div class="big" data-ip="${n}">${f(l)}</div><span data-ic="${n}">${up((l/s[58].c-1)*100)}</span><div data-is="${n}">${spark(s.map(x=>x.c))}</div></div>`}).join('')}</div>
+<div class="g2"><div><h2>Top movers · live sim</h2><div class="c tw"><table>${[...mv.slice(0,3),...mv.slice(-3)].map(m=>srow(m.s)).join('')}</table></div></div>
+<div><h2>Economic snapshot</h2><div class="c"><p>GDP, inflation, rates, unemployment, debt, oil and gold need a live source. Real figures are not shown here rather than inventing them.</p><p class="m">Setup: add server-side proxy routes for FRED / World Bank (macro), Twelve Data or Finnhub (quotes) and NewsAPI (news), keeping keys out of frontend code.</p><button onclick="location.hash='economy'">Open economics tools</button></div>
+<h2>Your learning</h2><div class="c">${done}/${LES.length} lessons passed<div class="bar"><i style="width:${done/LES.length*100}%"></i></div></div></div></div>`};
+R.markets=()=>{setTimeout(mk,0);const secs=[...new Set(ST.map(s=>s.sec))];
+return`<h1>Markets</h1>${banner}<h2>Sector performance · live sim</h2><div class="grid">${secs.map(c=>{const a=ST.filter(s=>s.sec==c).map(s=>Q(s.sym).ch),v=a.reduce((x,y)=>x+y)/a.length;return`<div class="c">${c}<div data-sc="${c}">${up(v)}</div></div>`}).join('')}</div>
+<h2>Explorer</h2><div class="row"><input id="mq" placeholder="Search name or ticker" oninput="mk()" style="max-width:240px"><select id="ms2" onchange="mk()"><option value="">All sectors</option>${secs.map(c=>`<option>${c}</option>`).join('')}</select><select id="mo" onchange="mk()"><option value="ch">Sort: daily change</option><option value="p">Sort: price</option><option value="n">Sort: name</option></select></div>
+<div class="c tw"><table><thead><tr><th>Company</th><th>Sector</th><th>Price</th><th>Day</th><th></th></tr></thead><tbody id="mt"></tbody></table><div id="me" class="m"></div></div>
+<h2>Compare (1Y, indexed to 100)</h2><div class="c"><div class="row"><select id="ca" onchange="cmp()">${ST.map(s=>`<option>${s.sym}</option>`).join('')}</select><select id="cb" onchange="cmp()">${ST.map((s,i)=>`<option${i==1?' selected':''}>${s.sym}</option>`).join('')}</select></div><div id="co"></div></div>`};
+function mk(){const q=$('#mq').value.toLowerCase(),sc=$('#ms2').value,o=$('#mo').value;let a=ST.filter(s=>(!sc||s.sec==sc)&&(s.sym+s.name).toLowerCase().includes(q));a.sort((x,y)=>o=='n'?x.name.localeCompare(y.name):o=='p'?Q(y.sym).p-Q(x.sym).p:Q(y.sym).ch-Q(x.sym).ch);
+$('#mt').innerHTML=a.map(srow).join('');$('#me').textContent=a.length?'':'No companies match your filters.';cmp()}
+function cmp(){const A=$('#ca').value,B=$('#cb').value,n=a=>{const s=tfData(a,'1Y').map(x=>x.c);return s.map(v=>v/s[0]*100)},a=n(A),b=n(B),mn=Math.min(...a,...b),mx=Math.max(...a,...b),P=(z,c)=>`<polyline fill="none" stroke="${c}" stroke-width="1.8" points="${z.map((v,i)=>(i/(z.length-1)*390+5)+','+(130-(v-mn)/(mx-mn)*120)).join(' ')}"/>`;
+out('co',`<svg viewBox="0 0 400 140" width="100%">${P(a,'var(--a)')}${P(b,'#f0b429')}</svg><span style="color:var(--a)">■ ${A} ${f(a[a.length-1]-100,1)}%</span> &nbsp; <span style="color:#f0b429">■ ${B} ${f(b[b.length-1]-100,1)}%</span>`)}
+R.companies=()=>`<h1>Companies</h1>${banner}<p class="m">Profiles are qualitative summaries. Revenue, profit, margin and balance-sheet figures need a licensed provider (e.g. Financial Modeling Prep) and are intentionally not fabricated.</p><div class="g2">${ST.map(s=>{const q=Q(s.sym);return`<div class="c"><h3>${s.name} <span class="m">${s.sym}</span></h3><div class="m">${s.sec}</div><p>${s.desc}</p><p><b>How it earns:</b> ${s.how}</p><p><b>Competitors:</b> ${s.comp}</p><div class="row"><b>${LP(s.sym)}</b> ${LC(s.sym)} <span class="m">live sim</span><button onclick="location.hash='stocks-${s.sym}'">Analyse</button><button onclick="wl('${s.sym}');go()">${S.wl.includes(s.sym)?'★ Watching':'☆ Watch'}</button></div></div>`}).join('')}</div>`;
+function ctl(){$('#ctl').innerHTML=['1D','1W','1M','3M','6M','1Y','5Y','MAX'].map(t=>`<button class="${ui.tf==t?'on':''}" onclick="ui.tf='${t}';dr()">${t}</button>`).join('')+` | <button class="${ui.type=='c'?'on':''}" onclick="ui.type='c';dr()">Candles</button><button class="${ui.type=='l'?'on':''}" onclick="ui.type='l';dr()">Line</button> | <button class="${ui.sma?'on':''}" onclick="ui.sma=1-ui.sma;dr()">SMA20</button><button class="${ui.bb?'on':''}" onclick="ui.bb=1-ui.bb;dr()">Bollinger</button>`}
+function dr(){ctl();chart('ch',tfData(curS,ui.tf),ui.type,ui);const c=ser(curS,ST.find(x=>x.sym==curS).base).map(x=>x.c),e12=ema(c,12),e26=ema(c,26),mc=e12.map((v,i)=>v-e26[i]),sg=ema(mc,9),L=c.length-1,r=rsi(c);
+out('ind',`<div class="grid"><div class="c">RSI(14)<div class="big">${f(r,1)}</div><span class="m">${r>70?'Overbought zone':r<30?'Oversold zone':'Neutral'}</span></div><div class="c">MACD<div class="big ${mc[L]>sg[L]?'up':'dn'}">${f(mc[L])}</div><span class="m">Signal ${f(sg[L])}</span></div><div class="c">SMA50 / SMA200<div class="big">${f(sma(c,50)[L],0)} / ${f(sma(c,200)[L],0)}</div></div></div>`)}
+R.stocks=p=>{curS=p&&ST.find(s=>s.sym==p)?p:curS;setTimeout(()=>{dr();dcf(curS);dy()},0);const s=ST.find(x=>x.sym==curS),q=Q(curS);
+return`<h1>Stock workspace</h1>${banner}<div class="row"><select onchange="location.hash='stocks-'+this.value">${ST.map(x=>`<option${x.sym==curS?' selected':''}>${x.sym}</option>`).join('')}</select><b>${s.name}</b><span class="big">${LP(curS)}</span>${LC(curS)}<button onclick="wl('${curS}');go()">${S.wl.includes(curS)?'★':'☆'} Watchlist</button></div>
+<div class="c"><div class="row" id="ctl"></div><div id="ch"></div></div><h2>Technical</h2><div id="ind"></div>
+<h2>Fundamentals</h2><div class="c m">Growth, margins, ROE/ROIC, debt and cash flow require a financial-statements API. Qualitative view: ${s.how}</div>
+<div class="g2"><div class="c"><h3>DCF valuation</h3>${inp('dF','Free cash flow / share now (₹)',Math.round(q.p/35))}${inp('dG','Growth % per year',10,.5)}${inp('dN','Years',10)}${inp('dD','Discount rate %',12,.5)}${inp('dT','Terminal growth %',4,.5)}<br><button onclick="dcf('${curS}')">Recalculate</button><div id="dO"></div></div>
+<div class="c"><h3>Dividend yield</h3>${inp('yD','Annual dividend / share (₹)',10)}${inp('yP','Price (₹)',Math.round(q.p))}<div id="yO"></div><button onclick="dy()">Calculate</button></div></div>`};
+function dy(){out('yO',`Yield <b class="big">${f(num('yD')/(num('yP')||1)*100)}%</b>`)}
+R.economy=()=>{setTimeout(()=>{calcC();calcI();calcG();sd();fx();cyc(0);ue&&0},0);
+return`<h1>Economics explorer</h1><h2>Concepts</h2><div class="c">${CON.map(c=>`<details><summary>${c[0]}</summary>${c[1]}</details>`).join('')}</div><h2>Interactive tools</h2><div class="g2">${compound()}
+<div class="c"><h3>Inflation calculator</h3>${inp('iA','Amount (₹)',100000)}${inp('iR','Inflation % per year',6,.1)}${inp('iY','Years',10)}<br><button onclick="calcI()">Calculate</button><div id="iO"></div></div>
+<div class="c"><h3>GDP growth</h3>${inp('gA','Earlier GDP',250)}${inp('gB','Later GDP',265)}<br><button onclick="calcG()">Calculate</button><div id="gO"></div></div>
+<div class="c"><h3>Supply &amp; demand</h3><label>Demand shift</label><input id="sdD" type="range" min="-40" max="40" value="0" oninput="sd()"><label>Supply shift</label><input id="sdS" type="range" min="-40" max="40" value="0" oninput="sd()"><label>Market price</label><input id="sdP" type="range" min="1" max="45" value="20" oninput="sd()"><div id="sdO"></div></div>
+<div class="c"><h3>Currency converter</h3>${inp('xA','Amount',100)}<div class="row"><select id="xF" onchange="fx()">${Object.keys(FX).map(k=>`<option>${k}</option>`).join('')}</select>→<select id="xT" onchange="fx()">${Object.keys(FX).map(k=>`<option${k=='INR'?' selected':''}>${k}</option>`).join('')}</select></div><button onclick="fx()">Convert</button><div id="xO"></div><div class="m">Simulated live rates that drift in real time. A real feed needs a server-side exchange-rate API.</div></div>
+<div class="c"><h3>Economic cycle</h3><div class="row">${CY.map((c,i)=>`<button onclick="cyc(${i})">${c[0]}</button>`).join('')}</div><div id="cyO"></div></div></div>`};
+R.investing=()=>{setTimeout(calcC,0);return`<h1>Investing</h1><div class="g2"><div class="c"><h3>Fundamentals</h3>${LES.map(l=>`<details><summary>${l.name}</summary>${l.s}<br><i>${l.ex}</i></summary></details>`).join('')}<button onclick="location.hash='learning'">Take the quizzes</button></div>${compound()}</div><p class="m">Educational content, not personal investment advice.</p>`};
+R.business=()=>{setTimeout(ue,0);return`<h1>Business intelligence</h1><p class="m">Qualitative case studies only; no company financials are shown.</p><div class="g2">${CAS.map(c=>`<div class="c"><h3>${c[0]}</h3><p>${c[1]}</p><b>Segments:</b> ${c[2]}<br><b>Edge:</b> ${c[3]}</div>`).join('')}</div><h2>Unit economics</h2><div class="c" style="max-width:420px">${inp('uC','Customer acquisition cost (₹)',3000)}${inp('uL','Monthly revenue / customer (₹)',500)}${inp('uM','Gross margin %',70)}${inp('uH','Monthly churn %',4,.5)}<br><button onclick="ue()">Calculate</button><div id="uO"></div></div>`};
+R.learning=()=>`<h1>Learning</h1><div class="c">Progress: ${Object.keys(S.prog).length}/${LES.length}<div class="bar"><i style="width:${Object.keys(S.prog).length/LES.length*100}%"></i></div></div><div class="g2">${LES.map((l,i)=>`<div class="c" id="L${i}"><h3>${l.name} ${S.prog[l.id]?'✅':''}</h3>${l.s}<p><i>Example:</i> ${l.ex}</p><p class="m">Key ideas: ${l.k}</p><b>${l.q}</b><div class="row">${l.o.map((o,j)=>`<button onclick="ans(${i},${j},this)">${o}</button>`).join('')}</div></div>`).join('')}</div><h2>Flashcards (tap to flip)</h2><div class="grid">${GL.map(g=>`<div class="c fc" onclick="this.innerHTML=this.dataset.f?'<b>${g[0]}</b>':'${g[1].replace(/'/g,'’')}';this.dataset.f=this.dataset.f?'':1"><b>${g[0]}</b></div>`).join('')}</div>`;
+function ans(i,j,b){const l=LES[i];if(j==l.a){S.prog[l.id]=1;save();b.className='on';b.textContent+=' ✓ Correct';setTimeout(go,700)}else{b.style.borderColor='var(--r)';b.textContent+=' ✗'}}
+/* ---- portfolio / watchlist ---- */
+const pf=()=>S.pf[S.cur],val=p=>p.cash+Object.entries(p.hold).reduce((a,[s,h])=>a+h.q*Q(s).p,0);
+function trade(side){const p=pf(),sym=$('#ts').value,q=Math.floor(num('tq')),pr=Q(sym).p;if(q<1)return err('Enter a quantity of at least 1.');const h=p.hold[sym]||{q:0,avg:0};
+if(side=='B'){if(pr*q>p.cash)return err('Not enough virtual cash.');p.hold[sym]={q:h.q+q,avg:(h.avg*h.q+pr*q)/(h.q+q)};p.cash-=pr*q}else{if(q>h.q)return err('You do not hold that many shares.');p.real+=(pr-h.avg)*q;p.cash+=pr*q;h.q-=q;if(!h.q)delete p.hold[sym]}
+p.tx.unshift({t:new Date().toLocaleString('en-IN'),side,sym,q,pr});p.snap.push(val(p));save();go()}
+const err=m=>{$('#te').textContent=m};
+R.portfolio=()=>{const p=pf(),v=val(p),hs=Object.entries(p.hold);let un=0;
+return`<h1>Portfolio simulator</h1><div class="warn"><b>Simulation only.</b> Virtual ₹10,00,000, simulated live prices, no brokerage and no real transactions.</div><div class="row"><select onchange="S.cur=this.value;save();go()">${Object.keys(S.pf).map(n=>`<option${n==S.cur?' selected':''}>${n}</option>`).join('')}</select><button onclick="np()">New portfolio</button><button onclick="if(confirm('Reset this portfolio?')){S.pf[S.cur]=newPf();save();go()}">Reset</button></div>
+<div class="grid"><div class="c">Total value<div class="big">${inr(v)}</div>${up((v/1e6-1)*100)}</div><div class="c">Cash<div class="big">${inr(p.cash)}</div></div><div class="c">Realized P/L<div class="big ${p.real>=0?'up':'dn'}">${inr(p.real)}</div></div></div>
+<div class="c" style="margin-top:10px"><div class="row"><select id="ts">${ST.map(s=>`<option>${s.sym}</option>`).join('')}</select><input id="tq" type="number" min="1" value="10" style="width:90px"><button onclick="trade('B')">Buy</button><button onclick="trade('S')">Sell</button><span id="te" class="dn"></span></div></div>
+<h2>Holdings</h2><div class="c tw">${hs.length?`<table><tr><th>Stock</th><th>Qty</th><th>Avg</th><th>Value</th><th>Unrealized</th></tr>${hs.map(([s,h])=>{const u=(Q(s).p-h.avg)*h.q;un+=u;return`<tr><td>${s}</td><td>${h.q}</td><td>${f(h.avg)}</td><td>${inr(h.q*Q(s).p)}</td><td class="${u>=0?'up':'dn'}">${inr(u)}</td></tr>`}).join('')}</table>`:'<span class="m">No holdings yet. Buy a stock above.</span>'}</div>
+${hs.length?`<h2>Allocation</h2><div class="c">${hs.map(([s,h])=>`<div class="row"><span style="width:90px">${s}</span><div class="bar" style="flex:1"><i style="width:${h.q*Q(s).p/v*100}%"></i></div>${f(h.q*Q(s).p/v*100,1)}%</div>`).join('')}</div>`:''}
+<h2>Performance (live value)</h2><div class="c">${p.snap.length>1?mini(p.snap,'Value'):'<span class="m">Buy a stock; the live value curve builds as prices move.</span>'}</div>
+<h2>Transactions</h2><div class="c tw">${p.tx.length?`<table>${p.tx.slice(0,30).map(t=>`<tr><td>${t.t}</td><td class="${t.side=='B'?'up':'dn'}">${t.side=='B'?'BUY':'SELL'}</td><td>${t.sym}</td><td>${t.q}</td><td>${f(t.pr)}</td></tr>`).join('')}</table>`:'<span class="m">No transactions.</span>'}</div>`};
+function np(){const n=prompt('Portfolio name');if(n&&!S.pf[n]){S.pf[n]=newPf();S.cur=n;save();go()}}
+function wl(s){const i=S.wl.indexOf(s);i<0?S.wl.push(s):S.wl.splice(i,1);save();if(location.hash=='#markets')mk()}
+R.watchlist=()=>`<h1>Watchlist</h1>${banner}<div class="c tw">${S.wl.length?`<table>${S.wl.map(s=>srow(ST.find(x=>x.sym==s))).join('')}</table>`:'<span class="m">Nothing here yet. Tap ☆ on any stock in Markets or Companies.</span>'}</div>`;
+/* ---- search ---- */
+const IX=[...ST.map(s=>({n:s.sym+' · '+s.name,k:'Stock',h:'stocks-'+s.sym})),...LES.map(l=>({n:l.name,k:'Lesson',h:'learning'})),...CON.map(c=>({n:c[0],k:'Concept',h:'economy'})),...GL.map(g=>({n:g[0],k:'Glossary',h:'learning'})),...CAS.map(c=>({n:c[0]+' case study',k:'Business',h:'business'}))];
+let sel=0,res=[];
+function sOpen(){$('#sr').style.display='block';$('#si').value='';$('#si').focus();sr()}function sClose(){$('#sr').style.display='none'}
+function sr(){const q=$('#si').value.toLowerCase();res=q?IX.filter(i=>i.n.toLowerCase().includes(q)).slice(0,8):S.hist.slice(0,6).map(h=>IX.find(i=>i.n==h)).filter(Boolean);sel=0;rs()}
+function rs(){$('#so').innerHTML=(res.length?'':'<div class="m it">'+($('#si').value?'No results':'Your recent searches appear here')+'</div>')+res.map((r,i)=>`<div class="it ${i==sel?'on':''}" onclick="pick(${i})"><span>${r.n}</span><span class="m">${r.k}</span></div>`).join('')}
+function pick(i){const r=res[i];if(!r)return;S.hist=[r.n,...S.hist.filter(x=>x!=r.n)].slice(0,8);save();sClose();location.hash=r.h}
+$('#si').oninput=sr;$('#si').onkeydown=e=>{if(e.key=='ArrowDown'){sel=Math.min(sel+1,res.length-1);rs();e.preventDefault()}else if(e.key=='ArrowUp'){sel=Math.max(sel-1,0);rs();e.preventDefault()}else if(e.key=='Enter')pick(sel);else if(e.key=='Escape')sClose()};
+addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key=='k'){e.preventDefault();sOpen()}});
+/* ---- router ---- */
+function go(){const h=location.hash.slice(1)||'home',i=h.indexOf('-'),r=i<0?h:h.slice(0,i),p=i<0?'':h.slice(i+1);if(!R[r]){location.hash='home';return}
+PG=r;try{$('#main').innerHTML=R[r](p)}catch(e){$('#main').innerHTML='<div class="c dn">Something went wrong rendering this page. Try another section.</div>'}
+$('#nav').innerHTML=[['home','Home'],['markets','Markets'],['economy','Economy'],['companies','Companies'],['stocks','Stocks'],['investing','Investing'],['business','Business'],['learning','Learning'],['portfolio','Portfolio Simulator'],['watchlist','Watchlist']].map(n=>`<a href="#${n[0]}" class="${n[0]==r?'on':''}" onclick="$('#nav').classList.remove('open')">${n[1]}</a>`).join('');scrollTo(0,0)}
+let NB=0,HV=0,tk=0,MF=0,PG='home';const IDS={},EV=[],band={};
+const LP=k=>`<span data-lp="${k}">₹${f(Q(k).p)}</span>`,LC=k=>`<span data-lc="${k}">${up(Q(k).ch)}</span>`,IQ=n=>{const s=ser(n,IDX.find(x=>x[0]==n)[1],60,.008),l=s[59].c;return{p:l,ch:(l/s[58].c-1)*100,a:s.map(x=>x.c)}};
+function tape(){const h=ST.map(s=>`<span class="tk"><b>${s.sym}</b> ${LP(s.sym)} ${LC(s.sym)}</span>`).join('');$('#tape').innerHTML=`<div class="tt">${h}${h}</div>`}
+function mstat(){const n=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Kolkata'})),s=n.getHours()*3600+n.getMinutes()*60+n.getSeconds(),wd=n.getDay()%6>0,o=wd&&s>=33300&&s<55800;let L;
+if(o)L=55800-s;else if(wd&&s<33300)L=33300-s;else{let i=1;while((n.getDay()+i)%7%6==0)i++;L=i*86400-s+33300}
+$('#ms').innerHTML=`<span class="${o?'up':'dn'}">●</span> NSE ${o?'open':'closed'} <span class="x">· ${o?'closes':'opens'} in ${Math.floor(L/3600)}h ${Math.floor(L%3600/60)}m ${L%60}s · ${n.toLocaleTimeString('en-IN')} IST <span title="Schedule-based; ignores holidays. Prices are simulated.">ⓘ</span></span>`}
+const fl=(e,v,t)=>{const o=+e.dataset.v;e.dataset.v=v;if(e.textContent!=t)e.textContent=t;if(o&&v!=o){e.classList.remove('fu','fd');void e.offsetWidth;e.classList.add(v>o?'fu':'fd')}};
+const qa=(a,fn)=>document.querySelectorAll(a).forEach(fn);
+function paint(){qa('[data-lp]',e=>{const v=Q(e.dataset.lp).p;fl(e,v,'₹'+f(v))});qa('[data-lc]',e=>e.innerHTML=up(Q(e.dataset.lc).ch));
+qa('[data-ip]',e=>{const v=IQ(e.dataset.ip).p;fl(e,v,f(v))});qa('[data-ic]',e=>e.innerHTML=up(IQ(e.dataset.ic).ch));qa('[data-is]',e=>e.innerHTML=spark(IQ(e.dataset.is).a));
+qa('[data-sc]',e=>{const a=ST.filter(s=>s.sec==e.dataset.sc).map(s=>Q(s.sym).ch);e.innerHTML=up(a.reduce((x,y)=>x+y)/a.length)})}
+function step(s,vol){const L=s[s.length-1];L.a=L.a||L.c;const o=L.c;L.c=o*(1+MF+(Math.random()-.5)*vol+.02*(L.a-o)/L.a);L.h=Math.max(L.h,L.c);L.l=Math.min(L.l,L.c);L.v+=Math.round(Math.random()*3e3)}
+function evt(m,c){EV.unshift(`<div><span class="m">${new Date().toLocaleTimeString('en-IN')}</span> <span class="${c}">${m}</span></div>`);EV.length=Math.min(EV.length,10);$('#ev').innerHTML=EV.join('');if($('#nt').style.display!='block'){NB++;$('#bn').textContent=NB}}
+function lrp(){const a=$('#ts'),b=$('#tq'),c=$('#te'),x=[a&&a.value,b&&b.value,c&&c.textContent];$('#main').innerHTML=R.portfolio();if(x[0]){$('#ts').value=x[0];$('#tq').value=x[1];$('#te').textContent=x[2]}}
+function tick(){tk++;MF=MF*.92+(Math.random()-.5)*7e-4;
+ST.forEach(x=>step(ser(x.sym,x.base),.0014));IDX.forEach(x=>step(ser(x[0],x[1],60,.008),.0007));
+for(const k in FX)if(k!='USD'&&k!='INR')FX[k]*=1+(Math.random()-.5)*4e-4;FX.INR=IQ('USD/INR').p;
+ST.forEach(x=>{const q=Q(x.sym),b=Math.trunc(q.ch);if(band[x.sym]!=null&&b!=band[x.sym])evt(`${x.sym} ${b>band[x.sym]?'rose':'fell'} to ${up(q.ch)} today`,q.ch>=0?'up':'dn');band[x.sym]=b});
+paint();
+if(PG=='stocks'&&tk%2==0&&Date.now()-HV>4e3)dr();
+if(PG=='markets'&&tk%6==0)mk();
+if(PG=='home'&&tk%10==0)$('#main').innerHTML=R.home();
+if(PG=='portfolio'&&tk%3==0&&!/INPUT|SELECT/.test(document.activeElement.tagName))lrp();
+if(PG=='economy'&&tk%2==0)fx();
+if(tk%5==0)Object.values(S.pf).forEach(p=>{if(Object.keys(p.hold).length){p.snap.push(val(p));if(p.snap.length>300)p.snap.shift()}});
+if(tk%30==0)save()}
+addEventListener('hashchange',go);mstat();setInterval(mstat,1e3);go();tape();setInterval(tick,1000);
+</script></body></html>
